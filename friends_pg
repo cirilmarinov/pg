@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Проект «Друзья Парка» — комплексный проект создания волонтерского центра на базе Парка Горького">
+    <meta name="author" content="Парк Горького">
+    <title>Друзья Парка — Волонтерский центр | Проект</title>
+
+    <!-- FAVICON (эмодзи) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌳</text></svg>">
+
+    <style>
+        /* ============ RESET ============ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: #eef2f7;
+            padding: 30px 20px;
+            color: #1a2a3a;
+            line-height: 1.6;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a { color: #0b3b5c; text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #1d5e85; text-decoration: underline; }
+        ul, ol { margin-left: 22px; margin-top: 8px; }
+        li { margin-bottom: 4px; }
+        p { margin-bottom: 12px; }
+        p:last-child { margin-bottom: 0; }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* ============ HEADER ============ */
+        .header {
+            background: linear-gradient(135deg, #0b3b5c 0%, #1d5e85 100%);
+            border-radius: 16px;
+            padding: 45px 50px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            box-shadow: 0 10px 40px rgba(11, 59, 92, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .header-content { position: relative; z-index: 1; }
+        .header .eyebrow {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #8fc3e0;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+            margin-bottom: 10px;
+            line-height: 1.15;
+            color: #ffffff;
+        }
+        .header .subtitle {
+            font-size: 17px;
+            opacity: 0.92;
+            margin-bottom: 24px;
+            max-width: 720px;
+            line-height: 1.5;
+        }
+        .header .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            font-size: 14px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255,255,255,0.18);
+        }
+        .header .meta > div > span {
+            font-weight: 700;
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.65;
+            margin-bottom: 4px;
+        }
+        .header .meta > div > div { color: #ffffff; font-weight: 500; }
+
+        /* ============ NAV TABS ============ */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 12px 0;
+            background: rgba(238, 242, 247, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .nav-tabs a {
+            background: #ffffff;
+            color: #1a2a3a;
+            padding: 10px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13.5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .nav-tabs a:hover {
+            border-color: #b0c8dd;
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+        .nav-tabs a.active {
+            background: #0b3b5c;
+            color: #ffffff;
+            border-color: #0b3b5c;
+            box-shadow: 0 4px 14px rgba(11, 59, 92, 0.3);
+        }
+
+        /* ============ SECTION ============ */
+        .section {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 32px 38px;
+            margin-bottom: 25px;
+            border-top: 5px solid #0b3b5c;
+            scroll-margin-top: 90px;
+            transition: box-shadow 0.2s;
+        }
+        .section:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.08); }
+        .section.section-risk { border-top-color: #c0392b; }
+        .section h2 {
+            font-size: 23px;
+            color: #0b3b5c;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+        .section h2 .num {
+            background: #0b3b5c;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .section h2 .num.num-risk { background: #c0392b; }
+        .section .desc {
+            font-size: 15px;
+            color: #5a6f83;
+            margin-bottom: 22px;
+            padding-left: 54px;
+        }
+
+        /* ============ COLLAPSIBLE ============ */
+        details {
+            background: #f8faff;
+            border: 1px solid #e2e9f2;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        details[open] {
+            background: #ffffff;
+            border-color: #c8d8e8;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+        details > summary {
+            padding: 16px 22px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            color: #0b3b5c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            list-style: none;
+            user-select: none;
+            gap: 12px;
+        }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary::marker { display: none; content: ''; }
+        details > summary::after {
+            content: '+';
+            font-size: 20px;
+            font-weight: 300;
+            color: #5a7fa0;
+            transition: all 0.2s;
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e8eef5;
+            line-height: 1;
+        }
+        details[open] > summary::after {
+            content: '−';
+            background: #0b3b5c;
+            color: #ffffff;
+        }
+        details[open] > summary {
+            border-bottom: 1px solid #e2e9f2;
+            background: #f0f4fa;
+        }
+        details > summary:hover { background: #eef3f9; }
+        details > summary .badge-inline {
+            font-size: 11px;
+            background: #dce8f2;
+            color: #0b3b5c;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        details > .content {
+            padding: 22px 26px;
+            font-size: 14.5px;
+            color: #2c3e50;
+        }
+
+        /* ============ DOC TEMPLATE ============ */
+        .doc-template {
+            background: #fdfdfd;
+            border: 1px dashed #b0c8dd;
+            border-radius: 8px;
+            padding: 28px 32px;
+            font-family: 'Times New Roman', Georgia, serif;
+            font-size: 14.5px;
+            line-height: 1.75;
+            color: #1a1a1a;
+            margin-top: 12px;
+        }
+        .doc-template .doc-header {
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 22px;
+            font-size: 15px;
+            border-bottom: 2px solid #0b3b5c;
+            padding-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+        .doc-template .doc-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 17px;
+            margin: 22px 0;
+            letter-spacing: 0.5px;
+        }
+        .doc-template .doc-section { margin: 16px 0; }
+        .doc-template .doc-section strong { display: block; margin-bottom: 8px; }
+        .doc-template .doc-sign {
+            margin-top: 35px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .doc-template .doc-sign > div { width: 45%; min-width: 220px; }
+
+        /* ============ TABLES ============ */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 14px 0;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            min-width: 500px;
+        }
+        th {
+            background: #e4ebf3;
+            color: #1a2a3a;
+            font-weight: 700;
+            padding: 13px 15px;
+            text-align: left;
+            border-bottom: 2px solid #cbd8e6;
+            font-size: 12.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9edf2;
+            vertical-align: top;
+        }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:hover td { background: #f8faff; }
+        tr.highlight td { background: #fef9e8; }
+
+        /* ============ CARDS ============ */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .card {
+            background: #f8faff;
+            border-radius: 10px;
+            padding: 20px 22px;
+            border-left: 4px solid #0b3b5c;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+        }
+        .card h4 {
+            font-size: 15px;
+            color: #0b3b5c;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .card p {
+            font-size: 14px;
+            color: #4a5f73;
+            margin-bottom: 0;
+        }
+
+        /* ============ BADGES ============ */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .badge-blue { background: #dce8f2; color: #0b3b5c; }
+        .badge-green { background: #d4edda; color: #1a6e3a; }
+        .badge-orange { background: #fde8d0; color: #8a4b1a; }
+        .badge-red { background: #fde8e8; color: #a13232; }
+
+        /* ============ TIMELINE ============ */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+            margin: 22px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 8px;
+            bottom: 8px;
+            width: 3px;
+            background: linear-gradient(to bottom, #0b3b5c, #b0c8dd);
+            border-radius: 3px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 22px;
+            padding-left: 16px;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 6px;
+            width: 15px;
+            height: 15px;
+            background: #0b3b5c;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 2px #0b3b5c;
+        }
+        .timeline-item h4 {
+            font-size: 15.5px;
+            color: #0b3b5c;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+        .timeline-item p {
+            font-size: 14px;
+            color: #4a5f73;
+            margin-bottom: 0;
+        }
+        .timeline-item .date {
+            font-size: 12px;
+            color: #ffffff;
+            background: #5a7fa0;
+            padding: 3px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        /* ============ CANVAS BLOCK ============ */
+        .canvas-block {
+            background: #f8faff;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 12px 0;
+            border-left: 4px solid #1d5e85;
+        }
+        .canvas-block h4 {
+            font-size: 15px;
+            color: #0b3b5c;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .canvas-block:last-child { margin-bottom: 0; }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #7a8fa3;
+            font-size: 13px;
+        }
+        .footer p { margin-bottom: 8px; }
+        .footer p:last-child { margin-bottom: 0; }
+
+        /* ============ SCROLL TO TOP ============ */
+        .scroll-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 48px;
+            height: 48px;
+            background: #0b3b5c;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(11, 59, 92, 0.35);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            font-size: 20px;
+            text-decoration: none;
+            z-index: 200;
+            border: none;
+        }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { background: #1d5e85; color: #ffffff; transform: translateY(-3px); text-decoration: none; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            body { padding: 16px 12px; }
+            .header { padding: 28px 24px; border-radius: 12px; }
+            .header h1 { font-size: 24px; }
+            .header .subtitle { font-size: 15px; }
+            .header .meta { gap: 14px; }
+            .section { padding: 22px 20px; border-radius: 12px; }
+            .section h2 { font-size: 18px; gap: 10px; }
+            .section h2 .num { width: 34px; height: 34px; min-width: 34px; font-size: 15px; }
+            .section .desc { padding-left: 0; font-size: 14px; }
+            details > .content { padding: 18px 18px; font-size: 14px; }
+            .doc-template { padding: 18px; font-size: 13.5px; }
+            table { font-size: 13px; }
+            th, td { padding: 10px 12px; }
+            .nav-tabs { gap: 8px; padding: 10px 0; }
+            .nav-tabs a { padding: 8px 14px; font-size: 12.5px; }
+            .doc-template .doc-sign > div { width: 100%; }
+            .scroll-top { bottom: 15px; right: 15px; width: 42px; height: 42px; }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 21px; }
+            .section h2 { font-size: 16.5px; }
+            .cards { grid-template-columns: 1fr; }
+            .nav-tabs a { padding: 7px 12px; font-size: 12px; }
+        }
+
+        /* ============ PRINT ============ */
+        @media print {
+            body { background: #ffffff; padding: 0; }
+            .nav-tabs, .scroll-top { display: none; }
+            details { page-break-inside: avoid; }
+            details[open] > summary { background: #f0f4fa; }
+            .header { box-shadow: none; }
+            .section { box-shadow: none; border: 1px solid #e2e9f2; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ============================ HEADER ============================ -->
+    <div class="header">
+        <div class="header-content">
+            <div class="eyebrow">Парк Горького · Проект · 2026</div>
+            <h1>🌳 «Друзья Парка»</h1>
+            <div class="subtitle">Комплексный проект создания волонтерского центра на базе Парка Горького: правовая основа, структура, дорожная карта, коммуникации и система мотивации</div>
+            <div class="meta">
+                <div><span>Заказчик</span><div>Руководство Парка Горького</div></div>
+                <div><span>Правовая основа</span><div>ФЗ-135 · Устав Парка</div></div>
+                <div><span>Методология</span><div>Community Canvas</div></div>
+                <div><span>Статус</span><div>⚡ Проект к утверждению</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================ NAV TABS ============================ -->
+    <nav class="nav-tabs" id="navTabs">
+        <a href="#sec-legal" class="active">📜 Правовая основа</a>
+        <a href="#sec-structure">🏛️ Структура</a>
+        <a href="#sec-docs">📄 Документы</a>
+        <a href="#sec-roadmap">🗺️ Дорожная карта</a>
+        <a href="#sec-comms">📣 Коммуникации</a>
+        <a href="#sec-motivation">🏆 Мотивация</a>
+        <a href="#sec-canvas">🧩 Community Canvas</a>
+        <a href="#sec-risks">⚠️ Риски</a>
+    </nav>
+
+    <!-- =============================================================== -->
+    <!-- РАЗДЕЛ 1. ПРАВОВАЯ ОСНОВА -->
+    <!-- =============================================================== -->
+    <section class="section" id="sec-legal">
+        <h2><span class="num">1</span> Правовая основа создания</h2>
+        <div class="desc">Анализ Устава Парка Горького и ФЗ-135 на предмет правовых оснований создания волонтерского центра</div>
+
+        <details open>
+            <summary>🔍 Ключевые пункты Устава Парка Горького <span class="badge-inline">Обоснование</span></summary>
+            <div class="content">
+                <p>Устав ГАУК г. Москвы «ЦПКиО им. М. Горького» содержит ряд пунктов, дающих полное де-юре право на создание волонтерского центра и привлечение добровольцев:</p>
+
+                <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th style="width:15%">Пункт Устава</th><th style="width:45%">Содержание</th><th style="width:40%">Применение для волонтерского центра</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>2.3.11</strong></td><td>Организация и проведение в помещениях и на территории Учреждения общественно-значимых, социальных и культурных мероприятий, творческих фестивалей и конкурсов, массовых представлений и праздничных народных гуляний</td><td>Прямое основание для привлечения волонтеров к организации событий</td></tr>
+                        <tr><td><strong>2.3.19</strong></td><td>Участие в международных выставках и ярмарках, организация выставочной деятельности</td><td>Волонтеры для сопровождения выставочных проектов</td></tr>
+                        <tr><td><strong>2.3.35</strong></td><td>Осуществление просветительной, научно-исследовательской деятельности</td><td>Волонтеры-экскурсоводы, лекторы, помощники в научных программах</td></tr>
+                        <tr><td><strong>2.3.36</strong></td><td>Хранение, выявление, изучение, описание, комплектование, публичное представление музейных предметов</td><td>Волонтеры в фондовой работе (при соответствующей подготовке)</td></tr>
+                        <tr><td><strong>2.3.44</strong></td><td>Организация отдыха, проведение мастер-классов, анимационных, интерактивных, досуговых, спортивных, экологических и культурно-массовых мероприятий</td><td>Событийное волонтерство</td></tr>
+                        <tr><td><strong>2.3.47</strong></td><td>Организация и проведение выставок книг, художественных произведений, произведений художников, мастеров декоративно-прикладного искусства</td><td>Волонтеры для вернисажей и художественных проектов</td></tr>
+                        <tr class="highlight"><td><strong>2.7</strong></td><td><strong>При осуществлении своей деятельности Учреждение вправе привлекать третьих лиц на основании гражданско-правовых сделок или на ином законном основании в рамках уставных целей деятельности Учреждения</strong></td><td><strong>🔑 Универсальное правовое основание для привлечения волонтеров без создания отдельного юридического лица</strong></td></tr>
+                        <tr class="highlight"><td><strong>3.1.7</strong></td><td>В Учреждении в качестве совещательных и научно-консультативных органов могут создаваться: Ученый совет, Научно-методический совет, <strong>иные коллегиальные совещательные и консультативные органы</strong>, состав и порядок работы которых утверждаются Руководителем Учреждения</td><td><strong>🔑 Возможность создать Координационный совет волонтерского центра как совещательный орган при директоре</strong></td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>⚖️ Федеральный закон № 135-ФЗ: ключевые нормы</summary>
+            <div class="content">
+                <div class="cards">
+                    <div class="card">
+                        <h4>Статья 5. Участники</h4>
+                        <p>Определяет <strong>организаторов добровольческой деятельности</strong> — юридических лиц, которые привлекают волонтеров на постоянной или временной основе. Парк Горького полностью подпадает под это определение.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Статья 17.1. Права волонтера</h4>
+                        <p>Право на информацию, поддержку (питание, форма, оборудование, оплата проезда), поощрение и награждение. Мы обязаны обеспечить эти права.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Статья 17.4. Формы поддержки</h4>
+                        <p>Органы власти могут оказывать: финансовую, организационную, информационную, консультационную, имущественную и методическую поддержку.</p>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>📘 Методические материалы Минэкономразвития (2016)</summary>
+            <div class="content">
+                <p>Документ от 29.11.2016 № 36550-ОФ/Д01и — практическое руководство для государственных учреждений. Описывает два способа организации добровольного труда:</p>
+                <ul>
+                    <li><strong>Партнерское взаимодействие с НКО</strong> — заключение соглашения, НКО привлекает и обучает волонтеров</li>
+                    <li><strong>Самостоятельная организация учреждением</strong> — учреждение назначает Координатора, разрабатывает Положение, ведет учет</li>
+                </ul>
+                <p><strong>Мы используем оба способа</strong>, но основным делаем самостоятельную организацию с элементами партнерства.</p>
+
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Рекомендация</th><th>Пункт</th><th>Наше действие</th></tr></thead>
+                    <tbody>
+                        <tr><td>Принять решение и разработать Положение</td><td>5.1.1</td><td>Разрабатываем Положение о волонтерском центре</td></tr>
+                        <tr><td>Назначить Координатора</td><td>5.1.5</td><td>Штатная единица или совмещение</td></tr>
+                        <tr><td>Обеспечить ресурсное обеспечение</td><td>5.5.1</td><td>Питание, символика, компенсация проезда, досуг</td></tr>
+                        <tr><td>Внедрить систему стимулов</td><td>5.5.2</td><td>Признание, поощрение, обучение, рекомендации</td></tr>
+                        <tr><td>Использовать учетные ведомости</td><td>5.8.2</td><td>Экспертная ведомость, Сводная ведомость учета</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- РАЗДЕЛ 2. СТРУКТУРА -->
+    <!-- =============================================================== -->
+    <section class="section" id="sec-structure">
+        <h2><span class="num">2</span> Структура волонтерского центра</h2>
+        <div class="desc">Организационная модель управления, роли и зоны ответственности</div>
+
+        <details open>
+            <summary>🏛️ Организационная структура</summary>
+            <div class="content">
+                <div class="canvas-block">
+                    <h4>Уровень 1. Стратегический</h4>
+                    <p><strong>Координационный совет</strong> — коллегиальный совещательный орган при директоре Парка. Утверждает планы, оценивает эффективность, принимает стратегические решения. Состав: 5–7 человек (директор, координатор, кураторы направлений, представитель администрации).</p>
+                </div>
+                <div class="canvas-block">
+                    <h4>Уровень 2. Оперативный</h4>
+                    <p><strong>Координатор волонтерского центра</strong> — штатная единица. Ведет учет, организует обучение, взаимодействует с кураторами, представляет интересы волонтеров перед руководством.</p>
+                </div>
+                <div class="canvas-block">
+                    <h4>Уровень 3. Направления</h4>
+                    <p><strong>Кураторы направлений</strong> — отвечают за конкретные виды волонтерской деятельности: событийное, экскурсионное, экологическое, медиа, фондовое.</p>
+                </div>
+                <div class="canvas-block">
+                    <h4>Уровень 4. Волонтеры</h4>
+                    <p>Активные участники: событийные волонтеры, экскурсоводы, садовники, фотографы, медиаволонтеры, помощники в фондах.</p>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>👥 Роли и зоны ответственности</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Роль</th><th>Кто</th><th>Задачи</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Координатор</strong></td><td>Штатный сотрудник</td><td>Планирование, привлечение, отбор, обучение, учет, контроль, представление интересов, оценка эффективности</td></tr>
+                        <tr><td><strong>Куратор направления</strong></td><td>Опытный волонтер / сотрудник</td><td>Постановка задач, контроль качества, наставничество, обратная связь</td></tr>
+                        <tr><td><strong>Волонтер-событийщик</strong></td><td>Волонтер</td><td>Помощь в организации фестивалей, концертов, выставок</td></tr>
+                        <tr><td><strong>Волонтер-экскурсовод</strong></td><td>Волонтер</td><td>Проведение экскурсий по Парку, помощь в просветительских программах</td></tr>
+                        <tr><td><strong>Волонтер-садовник</strong></td><td>Волонтер</td><td>Участие в озеленении, субботниках, уходе за растениями</td></tr>
+                        <tr><td><strong>Медиаволонтер</strong></td><td>Волонтер</td><td>Фото, видео, ведение соцсетей, создание контента</td></tr>
+                        <tr><td><strong>Помощник в фондах</strong></td><td>Волонтер</td><td>Помощь в описании, учете, хранении музейных предметов (под контролем хранителей)</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>📋 Направления деятельности</summary>
+            <div class="content">
+                <div class="cards">
+                    <div class="card"><h4>🎪 Событийное волонтерство</h4><p>Фестивали, концерты, выставки, массовые гуляния. Помощь в организации, навигации, встрече гостей.</p></div>
+                    <div class="card"><h4>📚 Экскурсионное и просветительское</h4><p>Экскурсии по Парку, лекции, помощь в образовательных программах, работа с посетителями.</p></div>
+                    <div class="card"><h4>🌿 Экологическое и хозяйственное</h4><p>Субботники, озеленение, уход за растениями, помощь в благоустройстве территории.</p></div>
+                    <div class="card"><h4>📸 Медиаволонтерство</h4><p>Фото- и видеосъемка событий, ведение соцсетей, создание контента, работа с архивами.</p></div>
+                    <div class="card"><h4>🏛️ Фондовое волонтерство</h4><p>Помощь в описании, учете, хранении музейных предметов (под контролем хранителей).</p></div>
+                    <div class="card"><h4>🤝 Корпоративное волонтерство</h4><p>Организация командных выездов для компаний-партнеров, ESG-программы.</p></div>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- РАЗДЕЛ 3. ДОКУМЕНТЫ -->
+    <!-- =============================================================== -->
+    <section class="section" id="sec-docs">
+        <h2><span class="num">3</span> Локально-нормативная документация</h2>
+        <div class="desc">Образцы документов для де-юре закрепления волонтерского центра</div>
+
+        <details>
+            <summary>📄 Приказ о создании Волонтерского центра «Друзья Парка» <span class="badge-inline">Образец</span></summary>
+            <div class="content">
+                <div class="doc-template">
+                    <div class="doc-header">
+                        ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ УЧРЕЖДЕНИЕ КУЛЬТУРЫ ГОРОДА МОСКВЫ<br>
+                        «ЦЕНТРАЛЬНЫЙ ПАРК КУЛЬТУРЫ И ОТДЫХА ИМЕНИ М. ГОРЬКОГО»
+                    </div>
+                    <div class="doc-title">ПРИКАЗ</div>
+                    <p style="text-align:center;">«___» ________ 2026 г. № ____</p>
+                    <p style="text-align:center;font-weight:700;margin:20px 0;">О создании Волонтерского центра «Друзья Парка»</p>
+                    <p>В соответствии с Федеральным законом от 11.08.1995 № 135-ФЗ «О благотворительной деятельности и добровольчестве (волонтерстве)», Уставом Учреждения (п. 2.7, 3.1.7), а также в целях развития добровольческой деятельности и повышения эффективности использования волонтерского ресурса</p>
+                    <p style="font-weight:700;margin:20px 0 10px;">ПРИКАЗЫВАЮ:</p>
+                    <p>1. Создать на базе Учреждения Волонтерский центр «Друзья Парка» (далее — Центр) без образования юридического лица.</p>
+                    <p>2. Утвердить Положение о Волонтерском центре «Друзья Парка» (Приложение № 1).</p>
+                    <p>3. Назначить Координатором Центра [ФИО, должность].</p>
+                    <p>4. Утвердить состав Координационного совета Центра (Приложение № 2).</p>
+                    <p>5. Контроль за исполнением приказа оставляю за собой.</p>
+                    <div class="doc-sign">
+                        <div>Директор ______________ / [ФИО]</div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>📘 Положение о Волонтерском центре «Друзья Парка» <span class="badge-inline">Структура</span></summary>
+            <div class="content">
+                <p>Документ разрабатывается на основе модельного проекта Минэкономразвития (Приложение № 2) с учетом специфики Парка Горького.</p>
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Раздел</th><th>Содержание</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>1. Общие положения</strong></td><td>Центр — добровольное объединение граждан. Не является юридическим лицом. Правовая основа: Конституция РФ, ГК РФ, ФЗ-135, Устав Учреждения.</td></tr>
+                        <tr><td><strong>2. Цели и задачи</strong></td><td>Содействие Учреждению в реализации уставных целей. Вовлечение граждан. Формирование сообщества «Друзей Парка».</td></tr>
+                        <tr><td><strong>3. Направления деятельности</strong></td><td>Событийное, экскурсионное, экологическое, медиа, фондовое волонтерство.</td></tr>
+                        <tr><td><strong>4. Права и обязанности волонтеров</strong></td><td>Права: информация, поддержка, обучение, поощрение. Обязанности: соблюдение правил, качество, неразглашение.</td></tr>
+                        <tr><td><strong>5. Управление Центром</strong></td><td>Координатор, Координационный совет.</td></tr>
+                        <tr><td><strong>6. Порядок привлечения и отбора</strong></td><td>Заявка → собеседование → договор → книжка волонтера.</td></tr>
+                        <tr><td><strong>7. Учет и оценка эффективности</strong></td><td>Сводная ведомость, ежегодный отчет перед директором.</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>📝 Договор с волонтером (форма) <span class="badge-inline">Образец</span></summary>
+            <div class="content">
+                <p>Рекомендуется адаптировать форму из КонсультантПлюс «Договор безвозмездного оказания услуг и выполнения работ в рамках добровольческой (волонтерской) деятельности».</p>
+                <div class="doc-template">
+                    <div class="doc-header">ДОГОВОР № ____<br>безвозмездного оказания услуг и выполнения работ<br>в рамках добровольческой (волонтерской) деятельности</div>
+                    <p style="text-align:right;">г. Москва</p>
+                    <p style="text-align:right;">«___» ________ 2026 г.</p>
+                    <p style="margin-top:20px;">ГАУК г. Москвы «ЦПКиО им. М. Горького», именуемое в дальнейшем «Организация», в лице [должность, ФИО], действующего на основании Устава, с одной стороны, и [ФИО, паспортные данные], именуемый в дальнейшем «Доброволец», с другой стороны, заключили настоящий Договор о нижеследующем:</p>
+                    <div class="doc-section">
+                        <strong>1. Предмет Договора</strong>
+                        <p>1.1. Доброволец обязуется безвозмездно выполнить для Организации работы и оказать услуги, предусмотренные п. 1.2.</p>
+                        <p>1.2. Доброволец выполняет следующие работы: [наименование, объем, срок].</p>
+                        <p>1.3. Работы выполняются в интересах благополучателей и Организации.</p>
+                    </div>
+                    <div class="doc-section">
+                        <strong>2. Права и обязанности Сторон</strong>
+                        <p>2.1. Организация обязуется: предоставлять оборудование, обеспечивать безопасные условия, компенсировать транспортные расходы, предоставлять питание, форму, средства индивидуальной защиты.</p>
+                        <p>2.2. Доброволец обязуется: выполнить работу качественно и в срок, не разглашать конфиденциальную информацию, бережно относиться к имуществу.</p>
+                        <p>2.3. Доброволец вправе: получать информацию, поддержку, поощрение, психологическую помощь.</p>
+                    </div>
+                    <div class="doc-section">
+                        <strong>3. Срок действия</strong>
+                        <p>Договор вступает в силу с момента подписания и действует до [дата].</p>
+                    </div>
+                    <div class="doc-sign">
+                        <div>Организация: ______________ / [ФИО]</div>
+                        <div>Доброволец: ______________ / [ФИО]</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>📊 Учетные формы (ведомости, анкеты)</summary>
+            <div class="content">
+                <div class="cards">
+                    <div class="card"><h4>Экспертная ведомость оценки качества труда</h4><p>Оценка по показателям: ответственность, применение знаний, инициативность, взаимопонимание, оценка клиента. Приложение № 6 к методическим материалам.</p></div>
+                    <div class="card"><h4>Сводная ведомость учета труда</h4><p>ФИО, подразделение, вид работы, целевая группа, количество часов, показатель качества. Приложение № 7.</p></div>
+                    <div class="card"><h4>Анкета добровольца</h4><p>Ожидания, достижения, трудности, потребность в поддержке, идеи. Приложение № 8.</p></div>
+                    <div class="card"><h4>Личная книжка добровольца</h4><p>Фиксация часов, обучения, поощрений. Выдается Координатором.</p></div>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- РАЗДЕЛ 4. ДОРОЖНАЯ КАРТА -->
+    <!-- =============================================================== -->
+    <section class="section" id="sec-roadmap">
+        <h2><span class="num">4</span> Дорожная карта внедрения</h2>
+        <div class="desc">Пошаговый план запуска волонтерского центра на 12 месяцев</div>
+
+        <details open>
+            <summary>🗺️ Этапы внедрения (12 месяцев)</summary>
+            <div class="content">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="date">Месяц 1–2</span>
+                        <h4>Подготовительный этап</h4>
+                        <p>Разработка Положения, Приказа, назначение Координатора. Создание Координационного совета. Утверждение бюджета. Разработка фирменного стиля.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="date">Месяц 3</span>
+                        <h4>Запуск (пилот)</h4>
+                        <p>Набор первой волонтерской группы (30–50 человек). Обучение. Пилотные задачи (1–2 события). Запуск системы учета.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="date">Месяц 4–8</span>
+                        <h4>Развитие</h4>
+                        <p>Расширение направлений. Запуск системы мотивации. Первый промежуточный отчет. Партнерство с вузами и НКО.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="date">Месяц 9–12</span>
+                        <h4>Масштабирование</h4>
+                        <p>Привлечение корпоративных волонтеров. Оценка эффективности. Подготовка годового отчета. Планирование следующего года.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Этап</th><th>Срок</th><th>Ключевые действия</th><th>Ответственный</th><th>Результат</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Подготовительный</strong></td><td>Мес. 1–2</td><td>Разработка документов, назначение Координатора, создание Совета</td><td>Директор, Координатор</td><td>Приказ, Положение, Совет</td></tr>
+                        <tr><td><strong>Запуск</strong></td><td>Мес. 3</td><td>Набор 30–50 волонтеров, обучение, пилотные задачи</td><td>Координатор, кураторы</td><td>Первая группа, 1–2 события</td></tr>
+                        <tr><td><strong>Развитие</strong></td><td>Мес. 4–8</td><td>Расширение направлений, мотивация, партнерства</td><td>Координатор, Совет</td><td>100+ волонтеров, система мотивации</td></tr>
+                        <tr><td><strong>Масштабирование</strong></td><td>Мес. 9–12</td><td>Корпоративные волонтеры, оценка, отчет</td><td>Координатор, Совет</td><td>Годовой отчет, план на след. год</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>📊 KPI и показатели успеха</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Показатель</th><th>1 год</th><th>2 год</th><th>3 год</th></tr></thead>
+                    <tbody>
+                        <tr><td>Активные волонтеры</td><td>100</td><td>300</td><td>500+</td></tr>
+                        <tr><td>Волонтерские часы в год</td><td>2 000</td><td>5 000</td><td>10 000+</td></tr>
+                        <tr><td>Возвращаемость волонтеров</td><td>70%</td><td>80%</td><td>90%</td></tr>
+                        <tr><td>Проведенные события с волонтерами</td><td>10</td><td>30</td><td>50+</td></tr>
+                        <tr><td>Экономический эффект (условная стоимость труда)</td><td>1 млн ₽</td><td>3 млн ₽</td><td>6 млн ₽</td></tr>
+                        <tr><td>Удовлетворенность волонтеров</td><td>80%</td><td>85%</td><td>90%</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- РАЗДЕЛ 5. КОММУНИКАЦИИ -->
+    <!-- =============================================================== -->
+    <section class="section" id="sec-comms">
+        <h2><span class="num">5</span> Стратегия коммуникации</h2>
+        <div class="desc">Каналы, сообщения и брифы для продвижения волонтерского центра</div>
+
+        <details open>
+            <summary>📣 Каналы коммуникации</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Тип</th><th>Канал</th><th>Назначение</th><th>Частота</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Внутренние</strong></td><td>Закрытый Telegram-канал «Друзья Парка»</td><td>Оперативные задачи, анонсы, координация</td><td>Ежедневно</td></tr>
+                        <tr><td><strong>Внутренние</strong></td><td>Ежемесячный дайджест «Голос Парка»</td><td>Итоги месяца, планы, благодарности</td><td>1 раз в месяц</td></tr>
+                        <tr><td><strong>Внутренние</strong></td><td>Ежемесячная планерка</td><td>Обратная связь, обсуждение проблем</td><td>1 раз в месяц</td></tr>
+                        <tr><td><strong>Внешние</strong></td><td>Страница на сайте Парка</td><td>Информация, форма записи, новости</td><td>По мере необходимости</td></tr>
+                        <tr><td><strong>Внешние</strong></td><td>Соцсети (VK, Telegram)</td><td>Привлечение, истории волонтеров, анонсы</td><td>3–4 раза в неделю</td></tr>
+                        <tr><td><strong>Внешние</strong></td><td>СМИ</td><td>Публикации о достижениях, интервью</td><td>По мере событий</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>💬 Ключевые сообщения (месседжи)</summary>
+            <div class="content">
+                <div class="cards">
+                    <div class="card"><h4>Для привлечения</h4><p>«Парк — это не только место, это люди. Стань частью команды, которая делает Парк Горького лучше».</p></div>
+                    <div class="card"><h4>Для удержания</h4><p>«Твой вклад имеет значение. Мы ценим каждого, кто помогает Парку».</p></div>
+                    <div class="card"><h4>Для партнеров</h4><p>«Корпоративное волонтерство в Парке Горького — это вклад в развитие города и команды».</p></div>
+                    <div class="card"><h4>Для СМИ</h4><p>«Друзья Парка» — сообщество людей, которые сохраняют наследие и создают будущее главного парка страны».</p></div>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>📋 Брифы коммуникационных кампаний</summary>
+            <div class="content">
+                <div class="canvas-block">
+                    <h4>Бриф № 1. Набор волонтеров (осень)</h4>
+                    <p><strong>Цель:</strong> привлечь 100 новых волонтеров. <strong>ЦА:</strong> студенты, пенсионеры, корпоративные группы. <strong>Каналы:</strong> вузы, центры «Мосволонтер», соцсети. <strong>Посыл:</strong> «Осень в Парке — время помогать». <strong>Срок:</strong> сентябрь-октябрь. <strong>KPI:</strong> 100 заявок, 50 прошедших отбор.</p>
+                </div>
+                <div class="canvas-block">
+                    <h4>Бриф № 2. День благодарности волонтеров</h4>
+                    <p><strong>Цель:</strong> удержание, повышение лояльности. <strong>ЦА:</strong> действующие волонтеры. <strong>Формат:</strong> церемония награждения, подарки, концерт. <strong>Посыл:</strong> «Вы — сердце Парка». <strong>Срок:</strong> декабрь. <strong>KPI:</strong> 80% явка, NPS 50+.</p>
+                </div>
+                <div class="canvas-block">
+                    <h4>Бриф № 3. Корпоративное волонтерство</h4>
+                    <p><strong>Цель:</strong> привлечь 5 компаний-партнеров. <strong>ЦА:</strong> HR-директора, ESG-менеджеры. <strong>Каналы:</strong> прямые контакты, бизнес-ассоциации. <strong>Посыл:</strong> «Сделайте доброе дело вместе с командой». <strong>Срок:</strong> в течение года. <strong>KPI:</strong> 5 соглашений, 200 корпоративных волонтеров.</p>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- РАЗДЕЛ 6. МОТИВАЦИЯ -->
+    <!-- =============================================================== -->
+    <section class="section" id="sec-motivation">
+        <h2><span class="num">6</span> Система удержания, поощрения и вовлечения</h2>
+        <div class="desc">Механики мотивации волонтеров с учетом возрастных групп и мотивов</div>
+
+        <details open>
+            <summary>🎯 Матрица мотивации по возрастным группам</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Группа</th><th>Мотивы</th><th>Стимулы</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Молодежь (18–25)</strong></td><td>Опыт, нетворкинг, портфолио</td><td>Рекомендательные письма, доступ к закрытым мероприятиям, мерч, обучение</td></tr>
+                        <tr><td><strong>Средний возраст (26–45)</strong></td><td>Самореализация, смена деятельности</td><td>Гибкий график, обучение, участие в управлении проектами</td></tr>
+                        <tr><td><strong>Старшее поколение (46+)</strong></td><td>Общение, передача опыта, досуг</td><td>Экскурсии, клуб по интересам, благодарственные письма</td></tr>
+                        <tr><td><strong>Корпоративные волонтеры</strong></td><td>ESG, командный дух</td><td>Публичное признание, совместные акции, отчет для компании</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>🏆 Механики удержания и поощрения</summary>
+            <div class="content">
+                <div class="cards">
+                    <div class="card"><h4>📔 Личная книжка волонтера</h4><p>Фиксация часов, обучений, поощрений. Официальный документ.</p></div>
+                    <div class="card"><h4>⭐ Система «рангов»</h4><p>Новичок → Друг → Хранитель → Посол Парка. Каждый ранг — новые привилегии.</p></div>
+                    <div class="card"><h4>📅 Ежемесячные планерки</h4><p>Обратная связь, обсуждение проблем, совместное планирование.</p></div>
+                    <div class="card"><h4>🎓 Обучение за счет Парка</h4><p>Курсы экскурсоводов, лекции по истории Парка, мастер-классы.</p></div>
+                    <div class="card"><h4>🎁 Доступ к ресурсам</h4><p>Бесплатное посещение катка, экскурсий, мероприятий. Мерч.</p></div>
+                    <div class="card"><h4>📰 Публичное признание</h4><p>Публикации в СМИ, благодарственные письма, награды, доска почета.</p></div>
+                </div>
+                <h4 style="margin-top:25px;color:#0b3b5c;">Нематериальное поощрение</h4>
+                <ul>
+                    <li>Благодарственные письма от директора Парка</li>
+                    <li>Публикации в СМИ и соцсетях</li>
+                    <li>Награды и дипломы</li>
+                    <li>Возможность стать куратором или войти в Координационный совет</li>
+                </ul>
+                <h4 style="margin-top:20px;color:#0b3b5c;">Материальное поощрение</h4>
+                <ul>
+                    <li>Мерч (футболки, значки, сумки)</li>
+                    <li>Билеты на события Парка</li>
+                    <li>Сувениры</li>
+                    <li>Компенсация проезда и питания (согласно ФЗ-135)</li>
+                </ul>
+            </div>
+        </details>
+
+        <details>
+            <summary>📈 Механики вовлечения</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Механика</th><th>Описание</th><th>Частота</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Онбординг</strong></td><td>Собеседование, инструктаж, знакомство с командой, первый «приветственный» набор</td><td>При вступлении</td></tr>
+                        <tr><td><strong>Наставничество</strong></td><td>За новичком закрепляется опытный волонтер</td><td>Первые 3 месяца</td></tr>
+                        <tr><td><strong>Обучение</strong></td><td>Курсы, лекции, мастер-классы</td><td>Ежемесячно</td></tr>
+                        <tr><td><strong>Клубная работа</strong></td><td>Неформальные встречи, экскурсии для волонтеров</td><td>Раз в квартал</td></tr>
+                        <tr><td><strong>Геймификация</strong></td><td>Система баллов, рейтинги, челленджи</td><td>Постоянно</td></tr>
+                        <tr><td><strong>Обратная связь</strong></td><td>Анкеты, опросы, интервью</td><td>Раз в квартал</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- РАЗДЕЛ 7. COMMUNITY CANVAS -->
+    <!-- =============================================================== -->
+    <section class="section" id="sec-canvas">
+        <h2><span class="num">7</span> Community Canvas: методология построения сообщества</h2>
+        <div class="desc">3 раздела, 17 тем — структура устойчивого сообщества «Друзья Парка»</div>
+
+        <details open>
+            <summary>🧩 Раздел «ИДЕНТИЧНОСТЬ» — Кто мы и во что верим?</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Тема</th><th>Вопрос</th><th>Ответ для «Друзей Парка»</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Мета</strong></td><td>Зачем существует сообщество?</td><td>Создать устойчивое сообщество людей, которые любят Парк Горького и готовы вкладывать время, знания и энергию в его развитие, сохранение и процветание.</td></tr>
+                        <tr><td><strong>Идентичность участников</strong></td><td>Кто наши люди?</td><td>Горожане 18+, студенты творческих вузов, пенсионеры-экскурсоводы, корпоративные волонтеры, «друзья парка» — люди, для которых Парк — часть личной истории.</td></tr>
+                        <tr><td><strong>Ценности</strong></td><td>Что важно?</td><td>Любовь к Парку. Ответственность. Открытость. Профессионализм. Взаимное уважение. Сохранение наследия.</td></tr>
+                        <tr><td><strong>Определение успеха</strong></td><td>Что считаем победой?</td><td>500+ активных волонтеров; 10 000+ часов волонтерского труда в год; 90% возвращаемость; позитивные изменения в инфраструктуре и событиях Парка.</td></tr>
+                        <tr><td><strong>Бренд</strong></td><td>Как нас узнают?</td><td>Название «Друзья Парка». Логотип (элемент фирменного стиля Парка). Девиз: «Парк — это мы».</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>🎭 Раздел «ОПЫТ» — Как участники взаимодействуют?</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Тема</th><th>Вопрос</th><th>Ответ для «Друзей Парка»</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Членство</strong></td><td>Как присоединиться?</td><td>Заявка через сайт / форму. Собеседование с координатором. Подписание договора. Выдача «Личной книжки добровольца».</td></tr>
+                        <tr><td><strong>Роли</strong></td><td>Какие роли есть?</td><td>Волонтер-событийщик, экскурсовод, садовник, фотограф, медиаволонтер, помощник в фондах, координатор группы.</td></tr>
+                        <tr><td><strong>Правила</strong></td><td>Что можно/нельзя?</td><td>Кодекс волонтера: пунктуальность, уважение к посетителям, соблюдение правил безопасности, неразглашение внутренней информации.</td></tr>
+                        <tr><td><strong>Ритуалы</strong></td><td>Какие традиции?</td><td>Ежегодный «День Друзей Парка». Ежемесячная «Планерка волонтеров». Вручение благодарственных писем на Дне города.</td></tr>
+                        <tr><td><strong>Контент</strong></td><td>Что читают/смотрят?</td><td>Закрытый Telegram-канал. Ежемесячный дайджест «Голос Парка». Обучающие видео о фондах и экспозициях.</td></tr>
+                        <tr><td><strong>События</strong></td><td>Что происходит офлайн?</td><td>Субботники. Экскурсии для волонтеров. Мастер-классы. Лекции. Событийные смены (фестивали).</td></tr>
+                        <tr><td><strong>Взаимодействие</strong></td><td>Как общаются?</td><td>Координатор — главная точка входа. Кураторы направлений. Чат «SOS» для срочных задач.</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>🏗️ Раздел «СТРУКТУРА» — Как это работает?</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Тема</th><th>Вопрос</th><th>Ответ для «Друзей Парка»</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Организация</strong></td><td>Кто управляет?</td><td>Координатор волонтерского центра (штатная единица). Кураторы по направлениям. Координационный совет (совещательный орган при директоре).</td></tr>
+                        <tr><td><strong>Финансирование</strong></td><td>Откуда деньги?</td><td>Бюджет Парка (ресурсное обеспечение). Гранты. Спонсорская помощь. Пожертвования.</td></tr>
+                        <tr><td><strong>Управление</strong></td><td>Как принимаются решения?</td><td>Стратегические — Координационный совет. Оперативные — Координатор.</td></tr>
+                        <tr><td><strong>Данные</strong></td><td>Как измеряем?</td><td>Учет часов (Сводная ведомость). Анкеты удовлетворенности. Показатели текучести. Экономический эффект (условная стоимость труда).</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>📚 Успешные практики (из методических материалов)</summary>
+            <div class="content">
+                <p>В методических материалах Минэкономразвития приведены примеры успешных практик. Наиболее релевантные для Парка Горького:</p>
+                <div class="cards">
+                    <div class="card"><h4>ГБУ НСО «Дом ветеранов» (Новосибирск)</h4><p><strong>Модель:</strong> «Техническое волонтерство» (уборка, мытье окон) 2 раза в год, 10–15 человек. «Pro bono» — осмотр врачами. <strong>Что берем:</strong> регулярность, четкие критерии отбора, договор, вводный курс.</p></div>
+                    <div class="card"><h4>Томский институт повышения квалификации</h4><p><strong>Модель:</strong> 3 модели работы с волонтерами (через НКО, через подразделение, через привлечение экспертов). <strong>Что берем:</strong> гибкость, использование волонтеров как экспертов и лекторов.</p></div>
+                    <div class="card"><h4>Омский центр народного творчества</h4><p><strong>Модель:</strong> кураторство делегаций на фестивалях, опросы, флешмобы. <strong>Что берем:</strong> работа с массовыми событиями, критерии отбора (коммуникабельность, ответственность).</p></div>
+                    <div class="card"><h4>Красноярская молодежная библиотека</h4><p><strong>Модель:</strong> привлечение волонтеров к интеллектуальным чемпионатам. <strong>Что берем:</strong> работа с молодежью, четкий инструктаж, благодарственные письма.</p></div>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- РАЗДЕЛ 8. РИСКИ -->
+    <!-- =============================================================== -->
+    <section class="section section-risk" id="sec-risks">
+        <h2><span class="num num-risk">!</span> Риски и рекомендации</h2>
+        <div class="desc">Ключевые риски проекта и способы их минимизации</div>
+
+        <details open>
+            <summary>⚠️ Карта рисков</summary>
+            <div class="content">
+                <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Риск</th><th>Вероятность</th><th>Влияние</th><th>Минимизация</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Правовой:</strong> отсутствие четкого Положения → трудовые споры</td><td><span class="badge badge-orange">Средняя</span></td><td><span class="badge badge-red">Высокое</span></td><td>Использовать форму договора из КонсультантПлюс, согласовать с юристами</td></tr>
+                        <tr><td><strong>Репутационный:</strong> плохая организация волонтеров → ущерб имиджу</td><td><span class="badge badge-orange">Средняя</span></td><td><span class="badge badge-red">Высокое</span></td><td>Обучение, кураторство, четкие регламенты</td></tr>
+                        <tr><td><strong>Финансовый:</strong> нехватка ресурсов на поддержку</td><td><span class="badge badge-red">Высокая</span></td><td><span class="badge badge-orange">Среднее</span></td><td>Привлечение спонсоров, грантов, использование внутренних ресурсов</td></tr>
+                        <tr><td><strong>Кадровый:</strong> отсутствие Координатора</td><td><span class="badge badge-orange">Средняя</span></td><td><span class="badge badge-red">Высокое</span></td><td>Назначить ответственного или открыть ставку</td></tr>
+                        <tr><td><strong>Мотивационный:</strong> текучесть волонтеров</td><td><span class="badge badge-orange">Средняя</span></td><td><span class="badge badge-orange">Среднее</span></td><td>Система мотивации, обучение, клубная работа</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>✅ Рекомендации по запуску</summary>
+            <div class="content">
+                <ol>
+                    <li><strong>Начать с пилота</strong> на одном направлении (например, событийное волонтерство).</li>
+                    <li><strong>Использовать опыт «Мосволонтера»</strong> и других парков (Сокольники, Зарядье).</li>
+                    <li><strong>Внедрить CRM-систему</strong> для учета волонтеров (как в примере МОО «Игры будущего»).</li>
+                    <li><strong>Согласовать документы с юридическим отделом</strong> до запуска.</li>
+                    <li><strong>Провести первый «День Друзей Парка»</strong> через 3 месяца после запуска.</li>
+                    <li><strong>Назначить Координатора</strong> — это ключевая фигура для успеха проекта.</li>
+                    <li><strong>Создать Координационный совет</strong> с участием представителей администрации Парка.</li>
+                </ol>
+            </div>
+        </details>
+    </section>
+
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="footer">
+        <p>Проект подготовлен на основе: Устава ГАУК г. Москвы «ЦПКиО им. М. Горького», Федерального закона от 11.08.1995 № 135-ФЗ, методических материалов Минэкономразвития России от 29.11.2016 № 36550-ОФ/Д01и, методологии Community Canvas.</p>
+        <p>Документ: для утверждения руководством Парка Горького · © 2026</p>
+    </footer>
+
+</div>
+
+<!-- ============================ SCROLL TOP ============================ -->
+<a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх" title="Наверх">↑</a>
+
+<script>
+    // ====== АКТИВНАЯ НАВИГАЦИЯ ПРИ СКРОЛЛЕ ======
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-tabs a');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                });
+            }
+        });
+    }, {
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+    });
+
+    sections.forEach(section => observer.observe(section));
+
+    // ====== КНОПКА «НАВЕРХ» ======
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    // ====== ПЛАВНАЯ ПРОКРУТКА ПО КЛИКУ НА ВКЛАДКИ ======
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
